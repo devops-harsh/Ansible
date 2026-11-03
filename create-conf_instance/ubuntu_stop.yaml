@@ -1,0 +1,15 @@
+---
+- name: playbook to stop only ubuntu instance from inventory of managed node 
+  hosts: all
+  become: true # root user to perform the action
+
+  tasks:
+    - name: print all the ansible gather facts 
+      ansible.builtin.debug:
+        var: ansible_facts # this will give us all the information about the managed nodes
+
+    - name: Shutdown or stop the ubuntu instance only 
+      ansible.builtin.command:
+        cmd: shutdown -t now 
+      when: ansible_facts['os_family']== "Debian" # if condtion of condtion statement perform
+

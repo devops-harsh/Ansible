@@ -1,0 +1,6 @@
+---
+- name: ec2 creating playbook
+  hosts: localhost # works on the local machine
+  connection: local # playbook runs on same machine
+  roles:
+   - ec2_create

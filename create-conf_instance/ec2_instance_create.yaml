@@ -1,0 +1,7 @@
+---
+- name: ec2 instance create file using the aws collection module
+  hosts: localhost 
+  connection: local 
+  roles:
+   - ec2_instance
+

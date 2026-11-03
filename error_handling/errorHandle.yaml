@@ -1,0 +1,38 @@
+---
+- name: error handling playbook
+  hosts: all
+  become: true
+  # gather_facts: false # it will ignore the gather facts steps
+
+  tasks:
+    - name: check openssl and openssh packages arre installed or not 
+      ansible.builtin.apt:
+        name: "{{item}}"
+        state: latest # to check package is installed or not present- to install 
+      loop:
+        - openssh-client
+        - openssl
+      ignore_errors: yes 
+
+    - name: verify docker is installed
+      ansible.builtin.apt:
+        name: docker.io
+        state: latest
+      register: output # regsiter the output in the variable 
+      ignore_errors: yes
+
+    - name: print the registered variable
+      ansible.builtin.debug:
+        var: output   # print the variable 
+    
+    - name: install the docker if not present 
+      ansible.builtin.apt:
+        name: docker.io
+        state: present
+        update_cache: true
+      when: output.failed == true
+
+      
+
+
+      

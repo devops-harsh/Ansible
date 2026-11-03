@@ -1,0 +1,25 @@
+---
+# requirement to run the code- boto3, aws configuration, aws collection
+- name: policy as code implementation 
+  hosts: localhost 
+  connection: local 
+  gather_facts: false 
+
+  tasks:
+   - name: list all the s3 bucket 
+     amazon.aws.aws_s3_bucket_info:
+        aws_access_key: "{{ aws_access_key }}" # jinja 2 template
+        aws_secret_key: "{{ aws_secret_key }}"
+     register: result
+
+   - name: print the list of s3 bucket 
+     ansible.builtin.debug:
+      var: result
+
+   - name: enable versioning 
+     amazon.aws.s3_bucket:
+        name: "{{ item.name }}"
+        versioning: true
+     loop: "{{ result.buckets }}"
+    # when: item.name.versioning == false - ansible is idempotency nature it will check the configuration if versioning is alredy enabled it should leave it without any change 
+      

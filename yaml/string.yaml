@@ -1,0 +1,17 @@
+--- # indicates this is yaml file 
+
+name : harsh 
+age : 22 
+working : true
+task: # list
+  - work
+  - study
+  - plan
+  - better every day
+
+address: # dict- key:value pair
+  - street : Mumbai 
+  - city : thane 
+  - state : Maharashtra 
+  - country: india 
+

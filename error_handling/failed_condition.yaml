@@ -1,0 +1,23 @@
+---
+- name: handling particular error 
+  hosts: all
+  become: true
+
+  tasks:
+  - name: check ls /tmp/test file 
+    ansible.builtin.command:
+      cmd: ls /tmp/test 
+    register: result
+    # ignore_errors: true 
+    failed_when: # if below condition found then ignore the erros only
+      - result.rc == 0 
+      - '"No such file or directory" in result.stdout'
+
+  - name: print the result 
+    ansible.builtin.debug:
+      var: result
+
+
+
+
+    

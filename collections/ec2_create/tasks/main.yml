@@ -1,0 +1,21 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for ec2_create
+
+- name: start an instance with a public IP address
+  # vars:
+  #  type: "t3.micro" // another place to declare the variable inside the playbook
+  amazon.aws.ec2_instance:
+    name: "ansible-created-instance"
+    # key_name: "prod-ssh-key"
+    # vpc_subnet_id: subnet-5ca1ab1e
+    aws_access_key: "{{aws_access_key}}" # we are going to access this sensitive information from the ansible vault
+    aws_secret_key: "{{aws_secret_key}}" #accessing the variable from the ansible vault
+    region: ap-south-1
+    instance_type: "{{ type }}" # jinja 2 templating standard to call the variables
+    security_group: default
+    network_interfaces:
+      - assign_public_ip: true
+    image_id: ami-01a00762f46d584a1
+    tags: 
+      Environment: ansible-create

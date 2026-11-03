@@ -1,0 +1,9 @@
+---
+- name: install and deploy #play started. 
+  hosts: webserver
+  become: true 
+  roles: 
+   - httpd
+
+   
+

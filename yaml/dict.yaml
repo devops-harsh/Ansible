@@ -1,0 +1,21 @@
+---
+
+person:
+  name : jhon doe
+  age: 21
+  city: new york 
+
+# list of dictionaries-
+
+family:
+  - parents:
+    - name: jhone # - creates comb of name and agen 
+      age : 30
+    - name: jane
+      age : 34 
+  
+  - children:
+    - name: jimmy # this is dict and - represents the start of first dict child here
+      age : 45
+    - name: jenny # this is dict and - represents the start of second dict child here
+      age : 20

@@ -1,0 +1,21 @@
+---
+- name: install and deploy #play started. there would be series of play in playbook
+  hosts: webserver 
+  become: true # remote user is root 
+
+  tasks: # tasks 
+  - name: Install apache httpd  # first task in play to install apache on server 
+    ansible.builtin.apt: # module
+      name: apache2
+      state: present # presetnt- install and absent= uninstall the package
+      update_cache: yes 
+  
+  - name: Copy file with owner and permissions # second task 
+    ansible.builtin.copy: # module 
+      src: index.html
+      dest: /var/www/html/
+      owner: root
+      group: root
+      mode: '0644'
+  
+
