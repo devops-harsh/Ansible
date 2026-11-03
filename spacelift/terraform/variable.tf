@@ -3,3 +3,7 @@ variable "instances_type" {
   default = "t2.micro"
 }
 
+variable "public_key" {
+  type    = string
+  default = "/mnt/workspace/id_rsa.pub"
+}

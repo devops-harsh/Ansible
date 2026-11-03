@@ -49,7 +49,7 @@ locals {
 
 resource "aws_key_pair" "ssh-key" {
   key_name   = "instance-access-key"
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = file(var.public_key)
 }
 
 
